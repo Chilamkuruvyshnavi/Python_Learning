@@ -7,8 +7,11 @@
     <h1 class="form-title">Welcome!!@@</h1>
     <p class="text-center text-muted">Django Sample Registration Form</p>
     
-    <div class="text-center">
+    <div class="text-center mb-3">
         <a href="{% url 'register' %}" class="btn btn-primary btn-register">Register Now</a>
+    </div>
+    <div class="text-center">
+        <a href="{% url 'user_list' %}" class="btn btn-secondary btn-register">View Registered Users</a>
     </div>
 </div>
 {% endblock %}

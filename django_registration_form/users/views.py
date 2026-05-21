@@ -52,6 +52,12 @@ def success(request):
     return render(request, 'users/success.html')
 
 
+def user_list(request):
+    """List all registered users from the database"""
+    registrations = UserRegistration.objects.select_related('user').all()
+    return render(request, 'users/user_list.html', {'registrations': registrations})
+
+
 def home(request):
     """Home page"""
     return render(request, 'index.html')

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Registered Users{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1 class="form-title">Registered Users</h1>
+
+    {% if registrations %}
+        <div class="table-responsive mt-4">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Registered At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for registration in registrations %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ registration.user.username }}</td>
+                            <td>{{ registration.email }}</td>
+                            <td>{{ registration.created_at|date:'M d, Y H:i' }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-center text-muted mt-4">No registered users found yet.</p>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="{% url 'home' %}" class="btn btn-primary btn-register">Back to Home</a>
+    </div>
+</div>
+{% endblock %}
