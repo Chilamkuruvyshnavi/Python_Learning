@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.views.decorators.http import require_http_methods
-from .forms import RegistrationForm
+from .forms import LoginForm, RegistrationForm
 from .models import UserRegistration
 
 @require_http_methods(["GET", "POST"])
@@ -50,6 +51,37 @@ def register(request):
 def success(request):
     """Display success page after registration"""
     return render(request, 'users/success.html')
+
+
+@require_http_methods(["GET", "POST"])
+def login_view(request):
+    """Handle user login"""
+    if request.user.is_authenticated:
+        return redirect('home')
+
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                auth_login(request, user)
+                messages.success(request, f'Welcome back, {user.username}!')
+                return redirect('home')
+            else:
+                messages.error(request, 'Invalid username or password.')
+    else:
+        form = LoginForm()
+
+    return render(request, 'users/login.html', {'form': form})
+
+
+def logout_view(request):
+    """Log the user out and redirect to home"""
+    auth_logout(request)
+    messages.success(request, 'You have been logged out.')
+    return redirect('home')
 
 
 def user_list(request):

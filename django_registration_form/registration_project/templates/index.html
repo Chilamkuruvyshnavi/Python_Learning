@@ -3,15 +3,24 @@
 {% block title %}Home - Django Registration Form{% endblock %}
 
 {% block content %}
-<div class="form-container">
-    <h1 class="form-title">Welcome!!@@</h1>
-    <p class="text-center text-muted">Django Sample Registration Form</p>
-    
-    <div class="text-center mb-3">
-        <a href="{% url 'register' %}" class="btn btn-primary btn-register">Register Now</a>
-    </div>
-    <div class="text-center">
-        <a href="{% url 'user_list' %}" class="btn btn-secondary btn-register">View Registered Users</a>
-    </div>
+<div class="form-container text-center">
+    {% if user.is_authenticated %}
+        <h1 class="form-title">Welcome back, {{ user.username }}!</h1>
+        <p class="text-center text-muted">You are logged in.</p>
+
+        <div class="d-grid gap-2">
+            <a href="{% url 'user_list' %}" class="btn btn-secondary btn-register">View Registered Users</a>
+            <a href="{% url 'logout' %}" class="btn btn-primary btn-register">Log Out</a>
+        </div>
+    {% else %}
+        <h1 class="form-title">Welcome!!@@</h1>
+        <p class="text-center text-muted">Django Sample Registration Form</p>
+        
+        <div class="d-grid gap-2">
+            <a href="{% url 'register' %}" class="btn btn-primary btn-register">Register Now</a>
+            <a href="{% url 'login' %}" class="btn btn-secondary btn-register">Log In</a>
+            <a href="{% url 'user_list' %}" class="btn btn-secondary btn-register">View Registered Users</a>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

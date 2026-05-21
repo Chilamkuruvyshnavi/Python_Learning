@@ -94,3 +94,26 @@ class RegistrationForm(forms.Form):
             raise ValidationError('Passwords do not match. Please try again.')
         
         return cleaned_data
+
+
+class LoginForm(forms.Form):
+    """Form for user login"""
+    username = forms.CharField(
+        label='Username',
+        max_length=150,
+        required=True,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your username',
+            'autocomplete': 'username'
+        })
+    )
+    password = forms.CharField(
+        label='Password',
+        required=True,
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your password',
+            'autocomplete': 'current-password'
+        })
+    )
