@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Registration Success{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <div class="text-center">
+        <div style="font-size: 3rem; color: #28a745; margin-bottom: 20px;">
+            ✓
+        </div>
+        <h1 class="form-title" style="color: #28a745;">Registration Successful!</h1>
+        <p class="text-muted">Your account has been created successfully.</p>
+        
+        <div style="margin-top: 30px;">
+            <p><strong>What's next?</strong></p>
+            <p>You can now use your credentials to access your account.</p>
+            
+            <a href="{% url 'home' %}" class="btn btn-primary btn-register">Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

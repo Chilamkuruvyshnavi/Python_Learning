@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Django Registration Form{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1 class="form-title">Welcome</h1>
+    <p class="text-center text-muted">Django Registration Form</p>
+    
+    <div class="text-center">
+        <a href="{% url 'register' %}" class="btn btn-primary btn-register">Register Now</a>
+    </div>
+</div>
+{% endblock %}
